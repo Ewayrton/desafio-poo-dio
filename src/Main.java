@@ -2,6 +2,7 @@ import br.com.dio.desafio.dominio.Bootcamp;
 import br.com.dio.desafio.dominio.Curso;
 import br.com.dio.desafio.dominio.Dev;
 import br.com.dio.desafio.dominio.Mentoria;
+import br.com.dio.desafio.exception.NenhumConteudoInscritoException;
 
 import java.time.LocalDate;
 
@@ -37,27 +38,40 @@ public class Main {
         devCamila.setNome("Camila");
         devCamila.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        devCamila.progredir();
-        devCamila.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos Camila:" + devCamila.getConteudosInscritos());
-        System.out.println("Conteúdos Concluídos Camila:" + devCamila.getConteudosConcluidos());
-        System.out.println("XP:" + devCamila.calcularTotalXp());
-
-        System.out.println("-------");
+            //tratando exceção na main
+            try {
+                devCamila.progredir();
+                devCamila.progredir();
+            }catch (NenhumConteudoInscritoException e){
+                System.err.println(e.getMessage());
+            }
+        //chamando método para imprimir as informações do dev para reduzir linhas de código
+        imprimirStatusDev(devCamila);
 
         Dev devJoao = new Dev();
         devJoao.setNome("Joao");
         devJoao.inscreverBootcamp(bootcamp);
         System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        devJoao.progredir();
-        devJoao.progredir();
-        devJoao.progredir();
-        System.out.println("-");
-        System.out.println("Conteúdos Inscritos João:" + devJoao.getConteudosInscritos());
-        System.out.println("Conteúdos Concluidos João:" + devJoao.getConteudosConcluidos());
-        System.out.println("XP:" + devJoao.calcularTotalXp());
+            //tratando exceção na main
+            try {
+                devJoao.progredir();
+                devJoao.progredir();
+                devJoao.progredir();
+            }catch (NenhumConteudoInscritoException e){
+                System.err.println(e.getMessage());
+            }
+            //chamando método para imprimir as informações do dev para reduzir linhas de código
+        imprimirStatusDev(devJoao);
 
+    }
+
+    //método para imprimir o status dos dev's
+    public static void imprimirStatusDev(Dev dev){
+        System.out.println("\n===== STATUS DO DEV =====");
+        System.out.println("Nome: " + dev.getNome());
+        System.out.println("Inscritos: " + dev.getConteudosInscritos());
+        System.out.println("Concluídos: " + dev.getConteudosConcluidos());
+        System.out.println("XP: " + dev.calcularTotalXp());
     }
 
 }

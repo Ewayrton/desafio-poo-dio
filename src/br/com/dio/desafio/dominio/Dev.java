@@ -1,5 +1,6 @@
 package br.com.dio.desafio.dominio;
 
+import br.com.dio.desafio.exception.NenhumConteudoInscritoException;
 import java.util.*;
 
 public class Dev {
@@ -17,8 +18,12 @@ public class Dev {
         if(conteudo.isPresent()) {
             this.conteudosConcluidos.add(conteudo.get());
             this.conteudosInscritos.remove(conteudo.get());
+
+            //substituindo um system out println, por uma exceção.
         } else {
-            System.err.println("Você não está matriculado em nenhum conteúdo!");
+            throw new NenhumConteudoInscritoException(
+                    "Não é possível progredir: Você não está matriculado em nenhum conteúdo."
+            );
         }
     }
 
